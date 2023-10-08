@@ -1,0 +1,21 @@
+public class Solution {
+
+    public static boolean splitArray(int[] input) {
+        return canSplit(input, 0, 0, 0);
+    }
+
+    private static boolean canSplit(int[] input, int index, int sum1, int sum2) {
+        if (index == input.length) {
+            return sum1 == sum2;
+        }
+
+        if (input[index] % 5 == 0) {
+            return canSplit(input, index + 1, sum1 + input[index], sum2);
+        } else if (input[index] % 3 == 0) {
+            return canSplit(input, index + 1, sum1, sum2 + input[index]);
+        } else {
+            return canSplit(input, index + 1, sum1 + input[index], sum2) ||
+                    canSplit(input, index + 1, sum1, sum2 + input[index]);
+        }
+    }
+}
